@@ -127,9 +127,9 @@ function play(letter)
         document.getElementById(letter).disabled=true;
         
         GuessWord.innerHTML=currentWord; 
-        count++
+        //count++
 
-        if(count==movie.length){
+        if(currentWord==movie){
             title.innerHTML="Win!";
             title.style.color="Green"
             setButton(true);
