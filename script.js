@@ -59,7 +59,8 @@ let mistakeCount = 6;
 let imageIndex=0;
 let count=0;
 mistakes.innerHTML=6;
-let freq = new Map();
+//let isDone = new Map();
+
 function replaceChar(origString, replaceChar, index) {
 
     let newStringArray = origString.split("");
@@ -67,22 +68,14 @@ function replaceChar(origString, replaceChar, index) {
     let newString = newStringArray.join("");
     return newString;
 }
-function frequencyCount()
-{
+// function frequencyCount()
+// {
     
-    for(let i=0;i<movie.length;i++) {
-        freq.set(movie.charAt(i),0);
-    }
-    for(let i=0;i<movie.length;i++) {
-        var now = freq.get(movie.charAt(i));
-        now++;
-        freq.set(movie.charAt(i),now);
-    }
-
-    for(let amount of freq) {
-        console.log(amount);
-      }
-}
+//     for(let i=0;i<movie.length;i++) {
+//         isDone.set(movie.charAt(i),true);
+//     }
+    
+// }
 function setButton(value)
 {
     let x=65;
@@ -95,11 +88,11 @@ function setButton(value)
 function play(letter)
 {
     //current = GuessWord.innerHTML;
-    let letterPosition;
+    let letterPosition=[];
     let isFound = false;
     for(var i=0;i<movie.length;i++) {
         if(movie.charAt(i)==letter && currentWord.charAt(i)=='-'){
-            letterPosition=i;
+            letterPosition.push(i);
             isFound=true;
             
         }
@@ -127,15 +120,11 @@ function play(letter)
     }
     else{
         
-        currentWord  = replaceChar(currentWord,letter,letterPosition);
-        let now = freq.get(letter);
-        if(now>0){
-            now=now-1;
-            freq.set(letter,now);
-            if(now==0){
-                document.getElementById(letter).disabled=true;
-            }
+        for(var pos of letterPosition) {
+            currentWord  = replaceChar(currentWord,letter,pos);
         }
+        
+        document.getElementById(letter).disabled=true;
         
         GuessWord.innerHTML=currentWord; 
         count++
@@ -162,7 +151,7 @@ function resetGame()
     count=0;
     setButton(false);
     setup();
-    frequencyCount();
+    
 }
 function setup()
 {
@@ -175,7 +164,7 @@ function setup()
     }
     GuessWord.innerHTML=currentWord;
     GuessWord.style.fontSize="4em";
-    frequencyCount();
+
 }
 function addBtnEvent()
 {
