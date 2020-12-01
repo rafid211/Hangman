@@ -145,6 +145,7 @@ function resetGame()
     document.getElementById('image').src = images[0];
     mistakeCount = 6;
     mistakes.innerHTML=mistakeCount;
+    imageIndex=0;
     title.innerHTML="Guess the movie name:"
     title.style.color="black";
     GuessWord.style.color="black";
